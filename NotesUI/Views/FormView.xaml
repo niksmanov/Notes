@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="NotesUI.Views.FormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NotesUI.Views"
+             mc:Ignorable="d" Background="{Binding Note.Color}" 
+             d:DesignHeight="450" d:DesignWidth="800">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="30" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="30" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="auto" />
+			<RowDefinition Height="30" />
+		</Grid.RowDefinitions>
+
+		<Label Grid.Column="1" Grid.Row="1" Margin="5">Color:</Label>
+		<ComboBox ItemsSource="{Binding Colors}" 
+				  SelectedValue="{Binding Note.Color}" 
+				  Grid.Column="2" Grid.Row="1" Width="150" 
+				  HorizontalAlignment="Left" Margin="5" />
+
+		<Label Grid.Column="1" Grid.Row="2" Margin="5">Title:</Label>
+		<TextBox Text="{Binding Note.Title, UpdateSourceTrigger=PropertyChanged}" 
+				 Grid.Column="2" Grid.Row="2" Width="300" Margin="5" />
+
+		<Label Grid.Column="1" Grid.Row="3" Margin="5">Text:</Label>
+		<TextBox Text="{Binding Note.Text}"
+				 Grid.Column="2" Grid.Row="3" Width="300" Height="auto" Margin="5" TextWrapping="Wrap"/>
+
+		<TextBlock Text="{Binding Note.DateCreated}" Grid.Column="2" Grid.Row="4" Margin="5" />
+
+		<Button Command="{Binding DeleteCommand}" 
+				CommandParameter="{Binding Note.Id}" 
+				Grid.Column="2" Grid.Row="5" Width="150">Delete Note</Button>
+
+		<Button Command="{Binding UpdateCommand}" 
+				CommandParameter="{Binding Note.Id}" 
+				Grid.Column="3" Grid.Row="5" Width="150">Edit Note</Button>
+	</Grid>
+</UserControl>
